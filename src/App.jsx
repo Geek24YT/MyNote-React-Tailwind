@@ -6,22 +6,11 @@ import deleteImage from "./assets/delete.png"
 
 function App() {
 
-  const [notes, setNotes] = useState([]);
-
-  useEffect(() => {
-    showNotes();
-  }, []);
+  const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('notes')) || []);
 
   useEffect(() => {
     updateStorage();
   }, [notes]);
-
-  const showNotes = () => {
-    const storedNotes = localStorage.getItem('notes');
-    if (storedNotes) {
-      setNotes(JSON.parse(storedNotes));
-    }
-  };
 
   const updateStorage = () => {
     localStorage.setItem('notes', JSON.stringify(notes));
